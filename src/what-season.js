@@ -1,7 +1,10 @@
 const CustomError = require("../extensions/custom-error");
 
 module.exports = function getSeason(date) {
-  if (arguments.length !== 0 && date instanceof Date) {
+  if(arguments.length !== 0 && !(date instanceof Date)) {
+    throw new Error("THROWN");
+  }
+  else if (arguments.length !== 0 && date instanceof Date) {
     const [
       year,
       month,
@@ -25,5 +28,6 @@ module.exports = function getSeason(date) {
   else {
     return 'Unable to determine the time of year!';
   }
-
+      
+    
 };

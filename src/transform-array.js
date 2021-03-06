@@ -1,7 +1,6 @@
 const CustomError = require("../extensions/custom-error");
 
 module.exports = function transform(arr) {
-
   let resArr=[];
   if (arr && arr.length !== 0 && Array.isArray(arr)) {
  
@@ -14,8 +13,11 @@ module.exports = function transform(arr) {
    } else if(arr[i]==='--discard-prev') {
      resArr.splice(-1,1);
    } else if(arr[i]==='--double-prev') {
-     resArr.push(resArr[resArr.length -1]);
+    if(arr[i-1]) {
+      resArr.push(resArr[resArr.length -1]);
+      }
    }else if(arr[i]==='--discard-next') {
+    resArr.push('');
      i++;
    }
    else {
@@ -24,10 +26,15 @@ module.exports = function transform(arr) {
  }
  
  
-  } else {
+  } 
+  else if(arr.length == 0) {
+    return [];
+  }
+    
+    else {
     throw new Error();
   }
  
  
- return resArr;
+ return resArr.filter(Number);
 };

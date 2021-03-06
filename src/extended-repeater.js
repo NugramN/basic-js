@@ -7,12 +7,15 @@ module.exports = function repeater(str, options) {
 
   let addition = (typeof options['addition'] === 'undefined') ? '' : options['addition'];
 
+
   let additionRepeatTimes = (typeof options['additionRepeatTimes'] === 'undefined') ? '' : options['additionRepeatTimes'];
 
 
-  let additionSeparator = (typeof options['additionSeparator'] === 'undefined') ? '|' : options['additionSeparator'];
+  let additionSeparator = (typeof options['additionSeparator'] === 'undefined') ? '' : options['additionSeparator'];
 
   let result = [];
+
+
 
   if (typeof repeatTimes === 'undefined') {
     result.push(str);
@@ -27,6 +30,7 @@ module.exports = function repeater(str, options) {
           for (let i = 0; i < additionRepeatTimes; i++) {
             if (i === (additionRepeatTimes - 1)) {
               result.push(addition);
+               
             } else {
               result.push(addition);
               result.push(additionSeparator);
@@ -59,5 +63,11 @@ module.exports = function repeater(str, options) {
     }
 
   }
-  return result.join('');
+
+let res = '';
+  result.forEach(function(element) {
+ res += String(element);
+
+  }) ;
+  return res;
 };

@@ -5,7 +5,7 @@ module.exports = function countCats(matrix) {
 
   matrix.forEach(function (item, i) {
     for (let i = 0; i < item.length; i++) {
-      if (String(item[i]).includes('^^')) {
+      if (String(item[i]).includes('^^') && String(item[i]).length == 2) {
         counter++;
       }
     }
