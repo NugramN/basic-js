@@ -2,21 +2,28 @@ const CustomError = require("../extensions/custom-error");
 
 module.exports = function transform(arr) {
   let resArr=[];
-  if (arr && arr.length !== 0 && Array.isArray(arr)) {
+
+  
+ let check = arr.find(elem=> elem=='--discard-prev' || elem=='--discard-next' || elem=='--double-next' || elem=='--double-prev');
+
+
+  if (arr && arr.length !== 0 && Array.isArray(arr) && check ) {
  
  
  for(let i=0;i<arr.length;i++) {
     if(arr[i]==='--double-next') {
-      if(arr[i+1]) {
+      if(arr[i+1] ) {
+        //console.log('heh:' + arr[i+1]);
      resArr.push(arr[i+1]);
       }
    } else if(arr[i]==='--discard-prev') {
      resArr.splice(-1,1);
    } else if(arr[i]==='--double-prev') {
     if(arr[i-1]) {
+      //console.log('huh:' + arr[i-1])
       resArr.push(resArr[resArr.length -1]);
       }
-   }else if(arr[i]==='--discard-next') {
+   }else if(arr[i]==='--discard-next' ) {
     resArr.push('');
      i++;
    }
@@ -26,15 +33,19 @@ module.exports = function transform(arr) {
  }
  
  
+if(!arr.join('') !== resArr.join('')) {
+ resArr = resArr.filter(Number);
+}
+ return resArr;
   } 
-  else if(arr.length == 0) {
-    return [];
+   
+  else if(!check) {
+return arr;
   }
-    
     else {
     throw new Error();
   }
  
  
- return resArr.filter(Number);
+ 
 };
