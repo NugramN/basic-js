@@ -46,7 +46,6 @@ module.exports = function repeater(str, options) {
         }
       }
       else {
-        console.log(repeatTimes);
         result.push(str);
         for (let i = 0; i < additionRepeatTimes; i++) {
           if (i === (additionRepeatTimes - 1)) {
